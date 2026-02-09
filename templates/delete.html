@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejani o‘chirish</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 20% 30%, #6dff9e 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, #4caf50 0%, transparent 45%),
+                linear-gradient(120deg, #0f172a, #020617);
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(
+                160deg,
+                rgba(255,255,255,0.14),
+                rgba(255,255,255,0.06)
+            );
+            backdrop-filter: blur(20px);
+            border-radius: 22px;
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,0.08),
+                0 30px 60px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        .card h2 {
+            color: #ffb4b4;
+            font-size: 26px;
+            margin-bottom: 18px;
+        }
+
+        .text {
+            color: rgba(255,255,255,0.9);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .text strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .warning {
+            color: #fecaca;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff5f5f, #dc2626);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 10px 25px rgba(255,95,95,0.45);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.18);
+            color: #f1f5f9;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.28);
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Rejani o‘chirish</h2>
+
+    <p class="text">
+        <strong>{{ task.title }}</strong> ni o‘chirishni tasdiqlaysizmi?
+    </p>
+
+    <p class="warning">
+        Bu amalni ortga qaytarib bo‘lmaydi.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">O‘chirish</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Bekor qilish</a>
+    </form>
+</div>
+
+</body>
+</html>

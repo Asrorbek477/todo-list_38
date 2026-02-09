@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Edit Task</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+/* BODY */
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 30%, #6dff9e 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, #4caf50 0%, transparent 45%),
+        linear-gradient(120deg, #0f172a, #020617);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* CONTAINER */
+.container {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+/* TITLE */
+.container h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* FORM GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+/* LABEL */
+label {
+    color: #e5e7eb;
+    font-size: 14px;
+}
+
+/* INPUT & SELECT */
+input,
+select {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.85);
+    color: #000;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #fff;
+    opacity: 1;
+}
+
+select option {
+    color: #000;
+}
+
+/* BUTTON */
+.btn {
+    background: linear-gradient(135deg, #6dff9e, #3ddc84);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #052e16;
+}
+
+.btn:hover {
+    box-shadow: 0 8px 20px rgba(61,220,132,0.5);
+}
+
+/* CANCEL BUTTON */
+.cancel {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+}
+
+.cancel:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>O'zgartirish</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="task-name">Task Name</label>
+            <input
+                type="text"
+                id="task-name"
+                name="title"
+                value="{{ task.title }}"
+                placeholder="Sarlavha..."
+                required
+            >
+
+            <label for="task-details">Task Detail</label>
+            <input
+                type="text"
+                id="task-details"
+                name="details"
+                value="{{ task.details }}"
+                placeholder="Batafsil..."
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="Not Started" {% if task.status == 'Not Started' %}selected{% endif %}>
+                    Not started
+                </option>
+                <option value="In Progress" {% if task.status == 'In Progress' %}selected{% endif %}>
+                    In Progress
+                </option>
+                <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>
+                    Completed
+                </option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn">Saqlash</button>
+        <a href="{% url 'home' %}" class="btn cancel" style="text-decoration: none; margin-left:10px;">
+            Orqaga
+        </a>
+    </form>
+</div>
+
+</body>
+</html>
