@@ -187,7 +187,7 @@
         <form method="post">
             {% csrf_token %}
             <div class="form1">
-                <input type="text" name="title" placeholder="Sarlavha...">
+                <input type="text" name="title" placeholder="Sarlavha..." required>
                 <input type="date" name="deadline">
                 <select name="status">
                     <option>Not Started</option>
@@ -196,8 +196,8 @@
                 </select>
             </div>
             <div class="form1">
-                <input type="text" name="details" placeholder="Batafsil...">
-                <button type="submit" class="btn">Qo‘shish</button>
+                <input type="text" name="details" placeholder="Batafsil..." required>
+                <button type="submit" class="btn" readonly>Qo‘shish</button>
             </div>
         </form>
     </div>
